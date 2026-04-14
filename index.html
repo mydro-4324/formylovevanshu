@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Vanshu 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Lato:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    body {
+      background: radial-gradient(ellipse at 30% 20%, #2d0a2e 0%, #1a0525 30%, #0d0118 60%, #020005 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* Subtle sparkle overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,200,230,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 60%, rgba(255,180,220,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 30%, rgba(255,210,240,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 70%, rgba(255,190,225,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 20%, rgba(255,200,235,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 85%, rgba(255,180,220,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 48%, rgba(255,210,240,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 82% 44%, rgba(255,200,230,0.4) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* TAP PROMPT */
+    #tap-prompt {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      z-index: 10;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    #tap-prompt.hidden {
+      opacity: 0;
+      transform: scale(0.92);
+      pointer-events: none;
+    }
+
+    .tap-icon {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      animation: floatHeart 2s ease-in-out infinite;
+    }
+
+    .tap-text {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      color: rgba(255, 200, 225, 0.85);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .tap-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tap-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 180, 210, 0.7);
+      animation: dotBounce 1.4s ease-in-out infinite;
+    }
+    .tap-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .tap-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes floatHeart {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.08); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+      40% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* NAME REVEAL */
+    #name-reveal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 1.5s ease 0.3s, transform 1.5s ease 0.3s;
+      pointer-events: none;
+    }
+
+    #name-reveal.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .name-label {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
+      color: rgba(255, 180, 210, 0.6);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      animation: fadeUpSoft 1.5s ease 1.2s backwards;
+    }
+
+    .name-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(5rem, 18vw, 11rem);
+      color: #fff0f8;
+      text-shadow:
+        0 0 20px rgba(255, 130, 180, 0.9),
+        0 0 45px rgba(255, 100, 160, 0.7),
+        0 0 90px rgba(220, 80, 140, 0.5),
+        0 0 160px rgba(200, 60, 120, 0.3);
+      animation: nameGlow 3s ease-in-out infinite 1.5s;
+      line-height: 1;
+    }
+
+    .name-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      color: rgba(255, 200, 225, 0.75);
+      margin-top: 16px;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 15px rgba(255, 150, 200, 0.6);
+      animation: fadeUpSoft 1.5s ease 1.8s backwards;
+    }
+
+    .heart-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      animation: fadeUpSoft 1.5s ease 2.2s backwards;
+    }
+
+    .heart-row span {
+      animation: heartPop 1.8s ease-in-out infinite;
+    }
+    .heart-row span:nth-child(2) { animation-delay: 0.2s; }
+    .heart-row span:nth-child(3) { animation-delay: 0.4s; }
+    .heart-row span:nth-child(4) { animation-delay: 0.6s; }
+    .heart-row span:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes nameGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 20px rgba(255, 130, 180, 0.9),
+          0 0 45px rgba(255, 100, 160, 0.7),
+          0 0 90px rgba(220, 80, 140, 0.5),
+          0 0 160px rgba(200, 60, 120, 0.3);
+      }
+      50% {
+        text-shadow:
+          0 0 30px rgba(255, 160, 200, 1),
+          0 0 70px rgba(255, 130, 180, 0.9),
+          0 0 130px rgba(240, 100, 160, 0.7),
+          0 0 220px rgba(220, 80, 140, 0.4);
+      }
+    }
+
+    @keyframes heartPop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    @keyframes fadeUpSoft {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FLOWER CONTAINER */
+    #flower-container {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      top: -80px;
+      font-size: 1.6rem;
+      opacity: 0;
+      animation: floatDown linear infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes floatDown {
+      0% {
+        transform: translateY(-80px) rotate(0deg) scale(0.6);
+        opacity: 0;
+      }
+      8% {
+        opacity: 0.9;
+      }
+      85% {
+        opacity: 0.75;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Shimmer background pulse on reveal */
+    #bg-pulse {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 2s ease;
+      background: radial-gradient(ellipse at center,
+        rgba(180, 40, 100, 0.18) 0%,
+        rgba(120, 20, 80, 0.08) 50%,
+        transparent 80%);
+    }
+
+    #bg-pulse.active {
+      opacity: 1;
+      animation: bgBreath 4s ease-in-out infinite;
+    }
+
+    @keyframes bgBreath {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Corner decorations */
+    .corner {
+      position: fixed;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      opacity: 0;
+      z-index: 6;
+      transition: opacity 1.5s ease 1s;
+      animation: cornerFloat 3s ease-in-out infinite;
+    }
+    .corner.visible { opacity: 0.55; }
+    .corner.tl { top: 20px; left: 20px; animation-delay: 0s; }
+    .corner.tr { top: 20px; right: 20px; animation-delay: 0.5s; }
+    .corner.bl { bottom: 20px; left: 20px; animation-delay: 1s; }
+    .corner.br { bottom: 20px; right: 20px; animation-delay: 1.5s; }
+
+    @keyframes cornerFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-8px) rotate(5deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background pulse -->
+  <div id="bg-pulse"></div>
+
+  <!-- Corner decorations -->
+  <div class="corner tl" id="c-tl">🌸</div>
+  <div class="corner tr" id="c-tr">🌺</div>
+  <div class="corner bl" id="c-bl">🌹</div>
+  <div class="corner br" id="c-br">💕</div>
+
+  <!-- Tap prompt -->
+  <div id="tap-prompt">
+    <div class="tap-icon">🌸</div>
+    <p class="tap-text">Tap anywhere on the screen…</p>
+    <div class="tap-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Name reveal -->
+  <div id="name-reveal">
+    <p class="name-label">made with love, just for</p>
+    <h1 class="name-text">Vanshu</h1>
+    <p class="name-subtitle">You are my favourite everything 💗</p>
+    <div class="heart-row">
+      <span>🌸</span><span>💖</span><span>🌺</span><span>💕</span><span>🌸</span>
+    </div>
+  </div>
+
+  <!-- Flower canvas area -->
+  <div id="flower-container"></div>
+
+  <script>
+    const flowers = ['🌸', '🌺', '🌹', '🌻', '🌷', '💐', '🌼', '🪷', '💮', '🌸', '🌺', '🌹'];
+    const container = document.getElementById('flower-container');
+    const tapPrompt = document.getElementById('tap-prompt');
+    const nameReveal = document.getElementById('name-reveal');
+    const bgPulse = document.getElementById('bg-pulse');
+    const corners = document.querySelectorAll('.corner');
+
+    let revealed = false;
+    let flowerInterval = null;
+
+    function createFlower() {
+      const el = document.createElement('div');
+      el.classList.add('flower');
+      el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+      const vw = window.innerWidth;
+      const centerGuard = vw * 0.18; // keep center 36% clear
+
+      // Randomly pick left or right side
+      let x;
+      if (Math.random() < 0.5) {
+        // left zone: 0 to (50% - centerGuard)
+        x = Math.random() * (vw / 2 - centerGuard);
+      } else {
+        // right zone: (50% + centerGuard) to vw
+        x = (vw / 2 + centerGuard) + Math.random() * (vw / 2 - centerGuard);
+      }
+
+      el.style.left = x + 'px';
+      el.style.fontSize = (1.0 + Math.random() * 1.8) + 'rem';
+
+      const duration = 4.5 + Math.random() * 6;
+      const delay = Math.random() * 1.5;
+      el.style.animationDuration = duration + 's';
+      el.style.animationDelay = delay + 's';
+
+      container.appendChild(el);
+
+      // Remove after animation completes
+      setTimeout(() => el.remove(), (duration + delay + 0.5) * 1000);
+    }
+
+    function startFlowers() {
+      // Initial burst
+      for (let i = 0; i < 14; i++) {
+        setTimeout(createFlower, i * 120);
+      }
+      // Continuous drizzle
+      flowerInterval = setInterval(() => {
+        createFlower();
+        if (Math.random() < 0.35) createFlower(); // occasional doubles
+      }, 420);
+    }
+
+    function onReveal() {
+      if (revealed) return;
+      revealed = true;
+
+      // Fade out tap prompt
+      tapPrompt.classList.add('hidden');
+
+      // Fade in name
+      nameReveal.classList.add('visible');
+
+      // Background pulse
+      bgPulse.classList.add('active');
+
+      // Show corners
+      corners.forEach(c => c.classList.add('visible'));
+
+      // Start flowers
+      startFlowers();
+    }
+
+    document.addEventListener('click', onReveal);
+    document.addEventListener('touchstart', onReveal, { passive: true });
+  </script>
+</body>
+</html>
