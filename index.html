@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For Vanshu 💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Lato:wght@300&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Lato:wght@300&display=swap"
+    rel="stylesheet" />
   <style>
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -34,16 +40,40 @@
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(1px 1px at 10% 15%, rgba(255,200,230,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 60%, rgba(255,180,220,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 50% 30%, rgba(255,210,240,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 75% 70%, rgba(255,190,225,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 90% 20%, rgba(255,200,235,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 85%, rgba(255,180,220,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 38% 48%, rgba(255,210,240,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 82% 44%, rgba(255,200,230,0.4) 0%, transparent 100%);
+        radial-gradient(1px 1px at 10% 15%, rgba(255, 200, 230, 0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 60%, rgba(255, 180, 220, 0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 30%, rgba(255, 210, 240, 0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 70%, rgba(255, 190, 225, 0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 20%, rgba(255, 200, 235, 0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 85%, rgba(255, 180, 220, 0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 48%, rgba(255, 210, 240, 0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 82% 44%, rgba(255, 200, 230, 0.4) 0%, transparent 100%);
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* BACKGROUND PHOTO SLIDESHOW */
+    #slideshow {
+      position: fixed;
+      inset: 0;
+      z-index: -1; /* behind everything */
+      pointer-events: none;
+    }
+
+    #slideshow img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(4px) brightness(0.35);
+      opacity: 0;
+      transition: opacity 1.8s ease;
+      will-change: opacity;
+    }
+
+    #slideshow img.active {
+      opacity: 1;
     }
 
     /* TAP PROMPT */
@@ -93,22 +123,52 @@
       background: rgba(255, 180, 210, 0.7);
       animation: dotBounce 1.4s ease-in-out infinite;
     }
-    .tap-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .tap-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    .tap-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .tap-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes floatHeart {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-10px) scale(1.08); }
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-10px) scale(1.08);
+      }
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
+
+      0%,
+      100% {
+        opacity: 0.7;
+      }
+
+      50% {
+        opacity: 1;
+      }
     }
 
     @keyframes dotBounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
-      40% { transform: translateY(-6px); opacity: 1; }
+
+      0%,
+      80%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      40% {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
     }
 
     /* NAME REVEAL */
@@ -138,7 +198,7 @@
       color: rgba(255, 180, 210, 0.6);
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 56px;
       animation: fadeUpSoft 1.5s ease 1.2s backwards;
     }
 
@@ -176,19 +236,34 @@
     .heart-row span {
       animation: heartPop 1.8s ease-in-out infinite;
     }
-    .heart-row span:nth-child(2) { animation-delay: 0.2s; }
-    .heart-row span:nth-child(3) { animation-delay: 0.4s; }
-    .heart-row span:nth-child(4) { animation-delay: 0.6s; }
-    .heart-row span:nth-child(5) { animation-delay: 0.8s; }
+
+    .heart-row span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .heart-row span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .heart-row span:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .heart-row span:nth-child(5) {
+      animation-delay: 0.8s;
+    }
 
     @keyframes nameGlow {
-      0%, 100% {
+
+      0%,
+      100% {
         text-shadow:
           0 0 20px rgba(255, 130, 180, 0.9),
           0 0 45px rgba(255, 100, 160, 0.7),
           0 0 90px rgba(220, 80, 140, 0.5),
           0 0 160px rgba(200, 60, 120, 0.3);
       }
+
       50% {
         text-shadow:
           0 0 30px rgba(255, 160, 200, 1),
@@ -199,13 +274,27 @@
     }
 
     @keyframes heartPop {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
     }
 
     @keyframes fadeUpSoft {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* FLOWER CONTAINER */
@@ -226,17 +315,21 @@
       will-change: transform, opacity;
     }
 
+
     @keyframes floatDown {
       0% {
         transform: translateY(-80px) rotate(0deg) scale(0.6);
         opacity: 0;
       }
+
       8% {
         opacity: 0.9;
       }
+
       85% {
         opacity: 0.75;
       }
+
       100% {
         transform: translateY(110vh) rotate(360deg) scale(1.1);
         opacity: 0;
@@ -252,9 +345,9 @@
       opacity: 0;
       transition: opacity 2s ease;
       background: radial-gradient(ellipse at center,
-        rgba(180, 40, 100, 0.18) 0%,
-        rgba(120, 20, 80, 0.08) 50%,
-        transparent 80%);
+          rgba(180, 40, 100, 0.18) 0%,
+          rgba(120, 20, 80, 0.08) 50%,
+          transparent 80%);
     }
 
     #bg-pulse.active {
@@ -263,8 +356,15 @@
     }
 
     @keyframes bgBreath {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
     }
 
     /* Corner decorations */
@@ -276,19 +376,56 @@
       transition: opacity 1.5s ease 1s;
       animation: cornerFloat 3s ease-in-out infinite;
     }
-    .corner.visible { opacity: 0.55; }
-    .corner.tl { top: 20px; left: 20px; animation-delay: 0s; }
-    .corner.tr { top: 20px; right: 20px; animation-delay: 0.5s; }
-    .corner.bl { bottom: 20px; left: 20px; animation-delay: 1s; }
-    .corner.br { bottom: 20px; right: 20px; animation-delay: 1.5s; }
+
+    .corner.visible {
+      opacity: 0.55;
+    }
+
+    .corner.tl {
+      top: 20px;
+      left: 20px;
+      animation-delay: 0s;
+    }
+
+    .corner.tr {
+      top: 20px;
+      right: 20px;
+      animation-delay: 0.5s;
+    }
+
+    .corner.bl {
+      bottom: 20px;
+      left: 20px;
+      animation-delay: 1s;
+    }
+
+    .corner.br {
+      bottom: 20px;
+      right: 20px;
+      animation-delay: 1.5s;
+    }
 
     @keyframes cornerFloat {
-      0%, 100% { transform: translateY(0) rotate(-5deg); }
-      50% { transform: translateY(-8px) rotate(5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(5deg);
+      }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Background photo slideshow (starts on reveal) -->
+  <div id="slideshow">
+    <img id="slide-a" src="" alt="" />
+    <img id="slide-b" src="" alt="" />
+  </div>
 
   <!-- Background pulse -->
   <div id="bg-pulse"></div>
@@ -313,8 +450,10 @@
     <p class="name-label">made with love, just for</p>
     <h1 class="name-text">Vanshu</h1>
     <p class="name-subtitle">You are my favourite everything 💗</p>
+    <p class="name-subtitle">I love youuu so much 🥰</p>
+    <p class="name-subtitle">I am sorry i did't mean to hurt you 😣</p>
     <div class="heart-row">
-      <span>🌸</span><span>💖</span><span>🌺</span><span>💕</span><span>🌸</span>
+      <span>😍</span><span>💖</span><span>😘</span><span>💕</span><span>🥰</span>
     </div>
   </div>
 
@@ -322,7 +461,7 @@
   <div id="flower-container"></div>
 
   <script>
-    const flowers = ['🌸', '🌺', '🌹', '🌻', '🌷', '💐', '🌼', '🪷', '💮', '🌸', '🌺', '🌹'];
+    const flowers = ['🌸', '🌺', '🌹', '🌻', '🥰', '💐', '🌼', '😘', '💮', '🌸', '😘', '🌹'];
     const container = document.getElementById('flower-container');
     const tapPrompt = document.getElementById('tap-prompt');
     const nameReveal = document.getElementById('name-reveal');
@@ -343,10 +482,8 @@
       // Randomly pick left or right side
       let x;
       if (Math.random() < 0.5) {
-        // left zone: 0 to (50% - centerGuard)
         x = Math.random() * (vw / 2 - centerGuard);
       } else {
-        // right zone: (50% + centerGuard) to vw
         x = (vw / 2 + centerGuard) + Math.random() * (vw / 2 - centerGuard);
       }
 
@@ -376,6 +513,47 @@
       }, 420);
     }
 
+    // Full-screen background slideshow URLs - Using your local photos!
+    const slideshowUrls = [
+      'IMG_20260314_214331_312.jpg',
+      'Screenshot_20260220-195147.Snapchat (1).jpg',
+      'Screenshot_20260222-102748.Snapchat (1).jpg',
+      'Screenshot_20260302-213823.Snapchat.jpg',
+      'Screenshot_20260304-213224.Snapchat.jpg'
+    ];
+
+    function startSlideshow() {
+      const slideA = document.getElementById('slide-a');
+      const slideB = document.getElementById('slide-b');
+      let index = 0;
+      let useA = true;
+
+      function showNext() {
+        const next = slideshowUrls[index % slideshowUrls.length];
+        index++;
+
+        if (useA) {
+          slideA.src = next;
+          // Wait for image to load then crossfade
+          slideA.onload = () => {
+            slideA.classList.add('active');
+            slideB.classList.remove('active');
+          };
+        } else {
+          slideB.src = next;
+          slideB.onload = () => {
+            slideB.classList.add('active');
+            slideA.classList.remove('active');
+          };
+        }
+        useA = !useA;
+      }
+
+      // Show first slide immediately, then switch every 5s
+      showNext();
+      setInterval(showNext, 5000);
+    }
+
     function onReveal() {
       if (revealed) return;
       revealed = true;
@@ -392,6 +570,9 @@
       // Show corners
       corners.forEach(c => c.classList.add('visible'));
 
+      // Start background photo slideshow
+      startSlideshow();
+
       // Start flowers
       startFlowers();
     }
@@ -400,4 +581,5 @@
     document.addEventListener('touchstart', onReveal, { passive: true });
   </script>
 </body>
+
 </html>
